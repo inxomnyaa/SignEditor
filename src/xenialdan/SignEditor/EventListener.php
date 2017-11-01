@@ -3,6 +3,7 @@
 namespace xenialdan\SignEditor;
 
 use pocketmine\block\WallSign;
+use pocketmine\event\block\SignChangeEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\form\CustomForm;
@@ -47,7 +48,12 @@ class EventListener implements Listener{
 				$text = array_map(function (CustomFormElement $element){
 					return $element->getValue();
 				}, $this->getAllElements());
-				$this->tile->setText(...$text);
+				Server::getInstance()->getPluginManager()->callEvent($ev = new SignChangeEvent($this->tile->getBlock(), $player, $text));
+				if(!$ev->isCancelled()){
+					$this->tile->setText($ev->getLines());
+				} else {
+					$player->sendMessage(TextFormat::RED . "The change was cancelled");
+				}
 				unset(Loader::$editing[$player->getName()]);
 				return parent::onSubmit($player);
 			}
