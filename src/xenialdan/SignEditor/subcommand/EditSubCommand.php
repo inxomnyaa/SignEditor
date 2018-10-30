@@ -3,7 +3,6 @@
 namespace xenialdan\SignEditor\subcommand;
 
 use pocketmine\command\CommandSender;
-use pocketmine\item\Item;
 use pocketmine\Player;
 use pocketmine\utils\TextFormat;
 use xenialdan\SignEditor\Loader;

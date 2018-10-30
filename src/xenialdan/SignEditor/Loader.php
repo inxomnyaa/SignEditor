@@ -2,10 +2,7 @@
 
 namespace xenialdan\SignEditor;
 
-use pocketmine\level\Location;
 use pocketmine\plugin\PluginBase;
-use pocketmine\Server;
-use pocketmine\utils\Config;
 
 
 class Loader extends PluginBase{
